@@ -44,7 +44,7 @@ def indexview():
                 Book.nazva.endswith(sf.searchf.data)
                 ))
                 books = [(item.id,item.nazva,','.join([autor.imja for autor in item.authors])) for item in searchbooks]
-                
+
                 searchauthors = sess.query(Author).filter(or_(Author.imja == sf.searchf.data,
                 Author.imja.startswith(sf.searchf.data),
                 Author.imja.contains(sf.searchf.data),
@@ -54,9 +54,6 @@ def indexview():
                 for item in searchauthors:
                     for b in item.books:
                         books2.append((b.id,b.nazva,','.join([autor.imja for autor in b.authors])))
-
-                #search_byauthors = sess.query(Book).filter(Book.authors.id.in_(aut_ids))
-                #books2 = [(item.id,item.nazva,','.join([autor.imja for autor in item.authors])) for item in search_byauthors]
                 books = books + books2
             except:
                 books=None
@@ -64,7 +61,7 @@ def indexview():
         pass
     ###################################################
 
-    
+
     # якщо користувач не авторизований - він бачить дефолтну першу сторінку
     # авторизований користувач входить на першу для авторизованих
     if not session.get('user_auth_key'):
@@ -174,7 +171,7 @@ def optionsview(option=None):
                                     book.authors=list(sess.query(Author).filter(Author.id.in_(a_ids)))
                                 sess.add(book)
                                 sess.commit()
-                            
+
                             elif addf.addtype.data == 'authors':
                                 author = Author()
                                 author.imja = addf.add.data
@@ -184,8 +181,8 @@ def optionsview(option=None):
                                 sess.add(author)
                                 sess.commit()
                         return redirect(url_for('adminview'))
-                        
-                            
+
+
             if option == 'delete':
                 if request.args.get('a'):
                     try:
@@ -194,7 +191,7 @@ def optionsview(option=None):
                         sess.commit()
                     except:
                         pass
-                        
+
                 elif request.args.get('b'):
                     try:
                         buk = int(request.args.get('b'))
@@ -220,7 +217,7 @@ def updateview():
         editf = UpdateEntryForm(request.form)
         editf.authors_list.choices = [(str(item.id),item.imja) for item in sess.query(Author).all()]
         editf.books_list.choices = [(str(item.id),item.nazva) for item in sess.query(Book).all()]
- 
+
         ############# РОБОТА ФОРМИ ##################
         if request.method == 'POST':
             if editf.validate():
@@ -281,7 +278,7 @@ def registerview():
                     nu_eu.password=enc224(rf.r_passw.data)
                     sess.add(nu_eu)
                     sess.commit()
-                    
+
                     session['user_auth_key'] = enc224('{0}__{1}'.format(nu_eu.nickname,nu_eu.password))
                     session['uname']=uname=nu_eu.nickname
                     return redirect(url_for('indexview'))
