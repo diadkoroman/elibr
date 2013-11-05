@@ -1,0 +1,65 @@
+{% extends 'admin.html' %}
+{% block content %}
+<div class="span9">
+<ul class="nav nav-tabs" id="options-menu">
+    <li><a href="#books">Книги</a></li>
+    <li><a href="#authors">Автори</a></li>
+</ul>
+{% include 'components/addf.html' %}
+<div id="books" class="tab">
+    <div class="row">
+    <div class="span9">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Книга</th>
+                <th>Автор(и)</th>
+                <th>DELETE</th>
+                <th>UPDATE</th>
+            </tr>
+            {% if books %}
+            {% for book in books %}
+            <tr>
+                {% for elem in book %}<td item="{{ book.0 }}">{{ elem }}</td>{% endfor %}
+                <td><a href="{{ url_for('optionsview',option='delete')}}?b={{ book.0 }}">del</a></td>
+                <td><a href="{{ url_for('optionsview',option='update')}}?b={{ book.0 }}">upd</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr><td colspan="5">Немає даних</td></tr>
+            {% endif %}
+        </table>
+    </div>
+</div>
+</div>
+
+
+<div id="authors" class="tab">
+    <div class="row">
+    <div class="span9">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Ім'я автора</th>
+                <th>DELETE</th>
+                <th>UPDATE</th>
+            </tr>
+            {% if authors %}
+            {% for author in authors %}
+            <tr>
+                {% for elem in author %}<td item="{{ author.0 }}">{{ elem }}</td>{% endfor %}
+                <td><a href="{{ url_for('optionsview',option='delete')}}?a={{ author.0 }}">del</a></td>
+                <td><a href="{{ url_for('optionsview',option='update')}}?a={{ author.0 }}">upd</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr><td colspan="5">Немає даних</td></tr>
+            {% endif %}
+        </table>
+    </div>
+    </div>
+</div>
+
+</div>
+<script type="text/javascript" src="{{ url_for('static',filename='jss/adm_options.js') }}"></script>
+{% endblock content %}

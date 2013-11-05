@@ -1,0 +1,22 @@
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+          <a class="brand" href="/">{{ title }}</a>
+          
+          <ul class="nav pull-right">
+              {% if not uname %}
+              <li><a href="{{ url_for('loginview') }}">Вхід</a></li>
+              <li><a href="{{ url_for('registerview') }}">Реєстрація</a></li>
+              {% endif %}
+              {% if uname %}
+              <li><a>{{ uname }}</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="{{ url_for('adminview') }}">Адміністрування</a></li>
+              <li><a href="{{ url_for('logoutview') }}">Вихід</a></li>
+              {% endif %}
+            </ul>
+            
+    </div>
+    </div>
+</div>
+

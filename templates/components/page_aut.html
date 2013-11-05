@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="row">
+<div class="span9">
+    {% include 'components/searchf.html'%}
+    <hr/>
+</div>
+</div>
+<div class="row">
+    <div class="span9">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Книга</th>
+                <th>Автор(и)</th>
+                <th>DELETE</th>
+                <th>UPDATE</th>
+            </tr>
+            {% if books %}
+            {% for book in books %}
+            <tr>
+                {% for elem in book %}<td>{{ elem }}</td>{% endfor %}
+                <td><a href="{{ url_for('optionsview',option='delete')}}?b={{ book.0 }}">del</a></td>
+                <td><a href="{{ url_for('optionsview',option='update')}}?b={{ book.0 }}">upd</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr><td colspan="5">Немає даних</td></tr>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

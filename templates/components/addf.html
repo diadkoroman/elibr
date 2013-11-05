@@ -1,0 +1,15 @@
+<form id="add-form" method="post" action="{{ url_for('optionsview',option='add') }}">
+    <fieldset>
+        <legend>Додати запис</legend>
+    <input type="hidden" name="addtype" value=""/>
+    {% from 'components/formfield_1.html' import render_field %}
+    <div class="input-append">
+        <input class="span4" id="appendedInputButton" type="text" name="add">
+        <button class="btn" type="button"></button>
+        <p class="authors">{{ render_field(addf.authors_list) }}</p>
+        <p class="authors">{#{ render_field(addf.add_books_author) }#}</p>
+        <p class="books">{{ render_field(addf.books_list) }}</p>
+        <p class="books">{#{ render_field(addf.add_authors_book) }#}</p>
+    </div>
+    </fieldset>
+</form>

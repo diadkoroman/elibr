@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="row">
+<div class="span9">
+    {% include 'components/searchf.html'%}
+    <hr/>
+</div>
+</div>
+
+<div class="row">
+    <div class="span9">
+        <table class="table table-bordered">
+            <tr>
+                <th>id</th>
+                <th>Книга</th>
+                <th>Автор(и)</th>
+            </tr>
+            {% if books %}
+            {% for book in books %}
+            <tr>
+                {% for elem in book %}<td>{{ elem }}</td>{% endfor %}
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr><td colspan="3">Немає даних</td></tr>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

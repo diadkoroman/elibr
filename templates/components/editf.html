@@ -1,0 +1,18 @@
+{% extends 'admin.html' %}
+{% block content %}
+<form id="edit-form" method="post" action="">
+    <fieldset>
+        <legend>Редагувати запис</legend>
+    <input type="hidden" name="edittype" value="{{ upd.2 }}"/>
+    <input type="hidden" name="upd_id" value="{{ upd.0 }}"/>
+    {% from 'components/formfield_1.html' import render_field %}
+    <div class="input-append">
+        <input class="span4" id="appendedInputButton" type="text" name="upd" value="{{ upd.1 }}">
+        <button class="btn" type="button"></button>
+        <p class="authors">{{ render_field(editf.authors_list) }}</p>
+        <p class="books">{{ render_field(editf.books_list) }}</p>
+    </div>
+    </fieldset>
+</form>
+<script type="text/javascript" src="{{ url_for('static',filename='jss/adm_options.js') }}"></script>
+{% endblock content %}
